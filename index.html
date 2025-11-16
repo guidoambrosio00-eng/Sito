@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Il mio sito personale</title>
+
+  <link rel="icon" href="File/Logo.png" type="image/jpeg">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Assistant:wght@400;600&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Colori pagina e dimensione*/
+    :root {
+      --primary: #B22222;
+      --dark: #0a0a0a;
+      --light: #ffffff;
+      --accent: #ff0000;
+      --max-width: 1100px;
+    }
+    
+    /* Stile pagina */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Assistant', sans-serif;
+      color: var(--light);
+      background-color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #000000d9;
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+    }
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 1rem 2rem;
+    }
+    header .logo {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.8rem;
+      color: var(--primary);
+
+    /* Menu navigazione */
+    }
+    nav ul {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    nav ul li a {
+      color: var(--light);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    nav ul li a:hover { color: var(--accent); }
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: var(--light);
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .hero video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.5);
+    }
+    .overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: var(--light);
+    }
+    .overlay h1 { font-family: 'Oswald', sans-serif; font-size: 3rem; }
+    .overlay p { font-size: 1.2rem; margin-top: 0.5rem; }
+
+    /* Bottone video */
+    .btn {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.8rem 2rem;
+      background: var(--primary);
+      color: var(--light);
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+    .btn:hover { background: var(--accent); }
+
+    section { padding: 6rem 2rem; }
+    .container { max-width: var(--max-width); margin: 0 auto; }
+
+    /* Chi sono */
+    .about .container {
+      display: flex; 
+      align-items: center; 
+      gap: 3rem; 
+      flex-wrap: wrap;
+    }
+    .about .text { flex: 1; text-align: center; }
+    .about .image img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #ffffff1a;
+    }
+
+    /* Hobby */
+    .hobbies h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-family: 'Oswald', sans-serif;
+      color: var(--accent);
+    }
+    .hobbies .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .hobbies .card {
+      background: #151515; 
+      border-radius: 8px; 
+      overflow: hidden; 
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+    .hobbies .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px #ff00004d;
+    }
+    .hobbies .card:hover { transform: translateY(-5px); }
+    .hobbies .card img { width: 100%; height: 300px; object-fit: cover; }
+    .hobbies .card p { padding: 1rem; font-weight: 600; }
+
+    /* Sezioni nascoste per le passioni */
+    .passione-dettaglio {
+      display: none;
+      opacity: 0;
+      transform: translateY(40px);
+      background: #111;
+      border-radius: 10px;
+      padding: 3rem 2rem;
+      margin-top: 2rem;
+      box-shadow: 0 0 20px #ff00004d;
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .passione-dettaglio.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .passione-dettaglio h3 {
+      font-family: 'Oswald', sans-serif;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    /* Social */
+    .social {
+      text-align: center;
+      margin-top: 2rem; 
+      font-size: 1rem;
+    }
+    .social a { 
+      color: var(--accent);
+      text-decoration: none;
+      margin: 0 0.3rem;
+    }
+    .social a:hover { color: var(--primary); }
+    .about h2,
+    .social h2 {
+      margin-bottom: 1rem;
+      font-family: 'Oswald', sans-serif;
+      color: var(--accent);
+    }
+
+    /* Footer */
+    footer {
+      background: #050505;
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.9rem;
+      color: #bbb;
+    }
+
+    /* Schermi piccoli */
+    @media (max-width: 768px) {
+      nav ul {
+        position: absolute; top: 70px; right: 0;
+        background: #000000f2;
+        flex-direction: column; width: 200px; padding: 1rem;
+        transform: translateX(100%); transition: transform 0.3s;
+      }
+      nav ul.open { transform: translateX(0); }
+      .menu-toggle { display: block; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="logo">Guido Ambrosio</div>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">Chi sono</a></li>
+          <li><a href="#hobbies">Passioni</a></li>
+          <li><a href="#social">Social</a></li>
+        </ul>
+      </nav>
+      <div class="menu-toggle">&#9776;</div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <video autoplay muted loop playsinline poster="File/Tramonto.jpg" class="hero-video">
+      <source src="File/Video.mp4" type="video/mp4">
+    </video>
+    <div class="overlay">
+      <h1>Ciao, sono Guido</h1>
+      <p>Benvenuto nel mio spazio personale</p>
+      <a href="#about" class="btn">Scopri di più su di me</a>
+    </div>
+  </section>
+
+  <!-- Chi sono -->
+  <section id="about" class="about">
+  <div class="container">
+    <div class="text">
+      <h2>Chi sono</h2>
+      <p>
+        Mi chiamo <strong>Guido Ambrosio</strong> e penso che le passioni, i sogni e le piccole ispirazioni di ogni giorno ci rendono ciò che siamo. <br>
+        Attraverso questo sito voglio condividere le mie: la fotografia, i motori, i viaggi e quei progetti che raccontano chi sono davvero.
+      </p>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top: 2rem;">
+    <video 
+      src="File/Presentazione.mp4"
+      poster="File/Profilo.jpg"
+      autoplay
+      muted
+      playsinline
+      controls
+      controlsList="nodownload noplaybackrate noremoteplayback"
+      disablePictureInPicture
+      style="width: 100%; max-width: 500px; border-radius: 10px; box-shadow: 0 0 20px #ff00004d; display: block; margin: 0 auto;">
+    </video>
+  </div>
+</section>
+
+  <!-- Passioni -->
+  <section id="hobbies" class="hobbies">
+    <div class="container">
+      <h2>Le mie passioni</h2>
+      <div class="grid">
+        <!-- Mostra descrizione passioni -->
+        <div class="card" onclick="mostraPassione('foto')"><img src="File/Fotografia.jpg" alt=""><p>Fotografia</p></div>
+        <div class="card" onclick="mostraPassione('motori')"><img src="File/Motori.jpg" alt=""><p>Motori</p></div>
+        <div class="card" onclick="mostraPassione('viaggi')"><img src="File/Viaggi.jpg" alt=""><p>Viaggi</p></div>
+      </div>
+
+      <!-- Sezioni nascoste -->
+      <div id="foto" class="passione-dettaglio">
+        <h3>📸 Fotografia</h3>
+        <p>Per me la fotografia è un modo per fermare il tempo e dare valore ai dettagli. Attraverso la fotocamera cerco emozioni, luci e momenti capaci di raccontare storie senza bisogno di parole.<br>
+            Amo fotografare i tramonti: hanno qualcosa di romantico e silenzioso che riesce sempre a trasmettermi pace e a ricordarmi la bellezza delle piccole cose.</p>
+      </div>
+
+      <div id="motori" class="passione-dettaglio">
+        <h3>🏎️ Motori</h3>
+        <p>I motori sono la mia forma di libertà. Mi affascinano la tecnica, il suono e l’energia che nasce quando passione e meccanica si incontrano. <br>
+            Più do gas, più sento crescere l’adrenalina: il casco ha ascoltato le mie storie, l’acceleratore i miei sfoghi, lo scarico ha urlato i miei silenzi e i freni hanno conosciuto le mie paure. <br>
+            La gente pensa che sia solo un pezzo di ferro, ma per me è molto di più, è un’estensione di ciò che sono.<br><br>
+            Ho un’attenzione particolare per il mio motorino, l’ho personalizzato secondo i miei gusti cercando di renderlo unico, proprio come il legame che ho con tutto ciò che amo.</p>
+      </div>
+
+      <div id="viaggi" class="passione-dettaglio">
+        <h3>✈️ Viaggi</h3>
+        <p>Viaggiare per me è il modo più autentico per crescere e scoprire me stesso. Amo esplorare città, natura e culture diverse: ogni luogo, ogni strada e ogni incontro lascia un segno che porto con me anche nei miei progetti, trasformando esperienze in ispirazione.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social -->
+  <section id="social" class="social">
+    <div class="container">
+      <h2>Social</h2>
+        <p>Seguimi sui miei profili social per scoprire di più sulla mia vita e, perché no, farne anche parte!</p>
+      <div class="social" >
+        <a href="https://www.instagram.com/ambro_guido/" target="_blank">Instagram</a> |
+        <a href="https://www.tiktok.com/@ambro_guido" target="_blank">TikTok</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Guido Ambrosio — Tutti i diritti riservati.</p>
+  </footer>
+
+  <script>
+    const toggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav ul');
+    toggle.addEventListener('click', () => nav.classList.toggle('open'));
+
+    /* Funzione per mostrare le sezioni */
+    function mostraPassione(id) {
+      const sezioni = document.querySelectorAll('.passione-dettaglio');
+      sezioni.forEach(sec => {
+        if (sec.id === id && !sec.classList.contains('active')) {
+          sec.classList.add('active');
+          sec.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          sec.classList.remove('active');
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
